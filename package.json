@@ -1,0 +1,15 @@
+{
+  "author": "Bram Stein <b.l.stein@gmail.com> (http://www.bramstein.com/)",
+  "name": "tpo",
+  "version": "0.0.1",
+  "repository": {
+    "url": ""
+  },
+  "engines": {
+    "node": "0.6.7"
+  },
+  "dependencies": {
+    "calcdeps": "0.1.4"
+  },
+  "devDependencies": {}
+}
