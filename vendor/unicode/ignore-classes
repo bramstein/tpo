@@ -1,0 +1,18 @@
+AI # Ambiguous (Alphabetic or Ideographic): East Asian legacy
+BK # Mandatory Break
+CB # Contingent Break Opportunity
+CJ # Conditional Japanese Starter
+CM # Combining Mark
+H2 # Hangul LV Syllable
+H3 # Hangul LVT Syllable
+ID # Ideographic
+HL # Hebrew Letter
+JL # Hangul L Jamo
+JT # Hangul T Jamo
+JV # Hangul V Jamo
+LF # Line Feed
+NL # Newline
+SA # Complex-Context Dependent
+SG # Surrogate
+XX # Unknown
+AL # Ordinary Alphabetic and Symbol Characters (everything not included here defaults to AL)

@@ -1,0 +1,8 @@
+{
+  "name": "linebreaking",
+  "version": "0.0.1",
+  "dependencies": {}
+  "bin": {
+    "linebreaking": "./bin/linebreaking"
+  },
+}
