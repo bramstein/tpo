@@ -123,28 +123,7 @@ function build(lineBreaksFilename, includeBlocksFilename, ignoreClassesFilename)
                     result[c] = new RegExp(regex);
                 });
 
-                console.log('// This file is auto-generated, do not modify.');
-                console.log("goog.provide('tpo.text.XX');");
-                console.log('');
-                console.log('tpo.text.linebreak = {');
-                console.log(Object.keys(result).map(function (c) {
-                    return '\t' + c + ': ' + result[c];
-                }).join(',\n'));
-                console.log('};');
-    /*
-                text = text.replace(/\n/g, '');
-
-                while (text) {
-                    Object.keys(result).forEach(function (c) {
-                        var m = result[c].exec(text);
-
-                        if (m) {
-                            //console.log('token: %s, value: %s', c, m[0]);
-                            text = text.substring(m[0].length);
-                        }
-                    });
-                }
-    */
+                console.log(result);
             });
         });
     });
