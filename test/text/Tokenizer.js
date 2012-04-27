@@ -29,15 +29,15 @@ describe('tpo.text.Tokenizer', function() {
             t.end.add(function() {
                 done();
             });
-            t.write('');
+            t.write(null, '');
             t.close();
         });
         
         it('returns one token', function(done) {
             var t = new Tokenizer(language),
                 result = [];
-            t.data.add(function(type, value) {
-                result.push([type, value]);
+            t.data.add(function(position, token) {
+                result.push([token.breakClass, token.value]);
             });
             t.end.add(function() {
                 expect(result.length).to.eql(1);
@@ -45,15 +45,15 @@ describe('tpo.text.Tokenizer', function() {
                 expect(result[0][1]).to.eql(' ');
                 done();
             });
-            t.write(' ');
+            t.write(null, ' ');
             t.close();
         });
         
         it('returns more tokens', function(done) {
             var t = new Tokenizer(language),
                 result = [];
-            t.data.add(function(type, value) {
-                result.push([type, value]);
+            t.data.add(function(position, token) {
+                result.push([token.breakClass, token.value]);
             });
             t.end.add(function() {
                 expect(result.length).to.eql(3);
@@ -67,7 +67,7 @@ describe('tpo.text.Tokenizer', function() {
                 expect(result[2][1]).to.eql('text');
                 done();
             });
-            t.write('some text');
+            t.write(null, 'some text');
             t.close();
         });
     });
