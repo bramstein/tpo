@@ -8,10 +8,10 @@ describe('tpo.util.Stream', function() {
         Stream.call(that);
         
         window.setTimeout(function() {
-            that.data.dispatch(1);
+            that.data.emit(1);
             window.setTimeout(function() {
-                that.data.dispatch(2);
-                that.end.dispatch();
+                that.data.emit(2);
+                that.end.emit();
             }, 10);
         }, 10);
     }
@@ -32,7 +32,7 @@ describe('tpo.util.Stream', function() {
         Stream.call(that);
         
         this.write = function() {
-            that.error.dispatch('Error');
+            that.error.emit('Error');
         };
     }
     goog.inherits(ErrorStream, Stream);
@@ -78,7 +78,7 @@ describe('tpo.util.Stream', function() {
 
             r.pipe(e);
             
-            expect(function() { r.data.dispatch('whoops!'); }).to.throwError();
+            expect(function() { r.data.emit('whoops!'); }).to.throwError();
         });
         
         it('does not throw an exception when there is an error handler', function(done) {
@@ -89,7 +89,7 @@ describe('tpo.util.Stream', function() {
                 done();
             });
             r.pipe(e);
-            r.data.dispatch('whoops!');
+            r.data.emit('whoops!');
         });
     });
 });

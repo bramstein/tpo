@@ -76,46 +76,46 @@ describe('tpo.util.Signal', function() {
         });
     });
     
-    describe('#dispatch', function() {
+    describe('#emit', function() {
         
-        it('dispatch to one listener', function(done) {
+        it('emit to one listener', function(done) {
             var e = new Signal();
             e.add(function() {
                 done();
             });
-            e.dispatch();
+            e.emit();
         });
         
-        it('dispatch to two listeners', function(done) {
+        it('emit to two listeners', function(done) {
             var e = new Signal();
             e.add(function() {
             });
             e.add(function() {
                 done();
             });
-            e.dispatch();
+            e.emit();
         });
         
-        it('dispatch with arguments', function(done) {
+        it('emit with arguments', function(done) {
             var e = new Signal();
             e.add(function(a, b) {
                 expect(a).to.eql(42);
                 expect(b).to.eql(20);
                 done();
             });
-            e.dispatch(42, 20);
+            e.emit(42, 20);
         });
         
-        it('does not dispatch when not active', function() {
+        it('does not emit when not active', function() {
             var e = new Signal();
             e.active = false;
             e.add(function() {
                 throw 'Error';
             });
-            e.dispatch();
+            e.emit();
         });
         
-        it('set active during event dispatch', function(done) {
+        it('set active during event emit', function(done) {
             var e = new Signal();
             
             e.add(function() {
@@ -127,7 +127,7 @@ describe('tpo.util.Signal', function() {
             e.add(function() {
                 throw 'Error';
             });
-            e.dispatch();
+            e.emit();
         });
     });
 });
