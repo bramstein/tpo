@@ -12,11 +12,20 @@
                 display: block;
             }
 
+            header {
+                text-align: center;
+            }
+
+            hr {
+                border: 1px solid #ccc;
+                border-bottom: 0px;
+            }
+
             article {
-                padding: 5% 15%;
-                font-family: 'adobe-garamond-pro', serif;
-                font-size: 20px;
-                line-height: 30px;
+                padding: 2% 15% 2% 15%;
+                font-family: 'Goudy Bookletter', serif;
+                font-size: 24px;
+                line-height: 36px;
                 color: #444;
             }
 
@@ -28,23 +37,26 @@
                 text-align: justify;
             }
 
-            strong {
-                font-size: 24px;
+            .type {
+                position: absolute;
             }
+
         </style>
 	</head>
 	<body>
         <div id="tpo-content">
             <article>
-                <h1>Flatland.</h1>
-                <hr/>
-                <h3>PART I.</h3>
-                <h2>THIS WORLD.</h2>
+                <header>
+                    <h1>Flatland.</h1>
+                    <hr/>
+                    <h3>PART I.</h3>
+                    <h2>THIS WORLD.</h2>
+                </header>
                 <h3>§ I. — <span>Of the Nature of Flatland.</span></h3>
 
-                <p><strong>I call our world Flatland</strong>, not because we call it so, but to make its nature clearer to you, my happy readers, who are privileged to live in Space.</p>
+                <p>I call our world Flatland, not because we call it so, but to make its nature clearer to you, my happy readers, who are privileged to live in Space.</p>
 
-                <p>Imagine a vast sheet of paper on which straight Lines, Triangles, Squares, Pentagons, Hexagons, and other figures, instead of remaining fixed in their places, move freely about, on or in the surface, but without the power of rising above or sinking below it, very much like shadows — only hard and with luminous edges — and you will then have a pretty correct notion of my country and countrymen. Alas, a few years ago, I should have said "<strong>my universe</strong>;" but now my mind has been opened to higher views of things.</p>
+                <p>Imagine a vast sheet of paper on which straight Lines, Triangles, Squares, Pentagons, Hexagons, and other figures, instead of remaining fixed in their places, move freely about, on or in the surface, but without the power of rising above or sinking below it, very much like shadows — only hard and with luminous edges — and you will then have a pretty correct notion of my country and countrymen. Alas, a few years ago, I should have said "my universe;" but now my mind has been opened to higher views of things.</p>
 
                 <p>In such a country, you will perceive at once that it is impossible that there should be anything of what you call a "solid" kind; but I dare say you will suppose that we could at least distinguish by sight the Triangles, Squares, and other figures, moving about as I have described them. On the contrary, we could see nothing of the kind, not at least so as to distinguish one figure from another. Nothing was visible, nor could be visible, to us, except Straight Lines; and the necessity of this I will speedily demonstrate.</p>
 
@@ -76,12 +88,33 @@
                 <p>At this period, square houses were still everywhere permitted, though discouraged by a special tax. But, about three centuries afterwards, the Law decided that in all towns containing a population above ten thousand, the angle of a Pentagon was the smallest house-angle that could be allowed consistently with the public safety. The good sense of the community has seconded the efforts of the Legislature; and now, even in the country, the pentagonal construction has superseded every other. It is only now and then in some very remote and backward agricultural district that an antiquarian may still discover a square house.</p>
             </article>
         </div>
-        <!--<script src="http://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>-->
+
+        <script src="../../vendor/webfont.js"></script>
         <script src="../../vendor/goog/base.js"></script>
         <script src="../../build/deps.js"></script>
         <script>goog.require('tpo');</script>
         <!--
         <script src="../../build/tpo.js"></script>
         -->
+
+        <script>
+            var root = document.getElementById('tpo-content'),
+                query = 'p';
+
+            WebFont.load({
+                custom: {
+                    families: ['Goudy Bookletter'],
+                    urls: ['fonts/goudy-bookletter.css']
+                },
+                active: function() {
+                    tpo.load(query, root);
+                },
+                inactive: function() {
+                    tpo.load(query, root);
+                }
+            });
+
+            tpo.init(query, root);
+        </script>
     </body>
 </html>
