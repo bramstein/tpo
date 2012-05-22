@@ -79,7 +79,7 @@ describe('tpo.text.BreakAction', function() {
             breakAction.close();
         });
 
-        it('handles explicit breaks (AL, NL, AL)', function(done) {
+        it('handles explicit breaks (AL, NL, AL, AL)', function(done) {
             var breakAction = new BreakAction(),
                 result = [];
 
@@ -90,13 +90,15 @@ describe('tpo.text.BreakAction', function() {
             breakAction.end.add(function() {
                 expect(result[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
                 expect(result[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                expect(result[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
+                expect(result[2].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+                expect(result[3].breakAction).to.eql(BreakAction.Type.EXPLICIT);
                 done();
             });
 
             breakAction.write(null, new Token(1, Token.Class.AL));
             breakAction.write(null, new Token(2, Token.Class.NL));
             breakAction.write(null, new Token(3, Token.Class.AL));
+            breakAction.write(null, new Token(4, Token.Class.AL));
             breakAction.close();
         });
 
