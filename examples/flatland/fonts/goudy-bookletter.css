@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'Goudy Bookletter';
+  src: url('goudy-bookletter/goudy_bookletter_1911-webfont.eot'); /* IE 5-8 */
+  src: local('☺'),             /* sneakily trick IE */
+        url('goudy-bookletter/goudy_bookletter_1911-webfont.woff') format('woff'),    /* FF 3.6, Chrome 5, IE9 */
+        url('goudy-bookletter/goudy_bookletter_1911-webfont.ttf') format('truetype'), /* Opera, Safari */
+        url('goudy-bookletter/goudy_bookletter_1911-webfont.svg#font') format('svg'); /* iOS */
+}
