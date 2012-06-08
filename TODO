@@ -4,8 +4,5 @@ http://fittextjs.com/
 http://stackoverflow.com/questions/4771304/justify-the-last-line-of-a-div
 https://developer.mozilla.org/en/CSS/text-align-last
 https://bugs.webkit.org/show_bug.cgi?id=76173
--hyphenate AL nodes longer than 5/6 characters.
--add support for <br> and &nbsp; in the input.
--optimizing stream which combines tokens with the same break action into one to reduce the number of DOM nodes
 -"typography" stream which takes common ASCII conventions like "---" and turns it into an em dash.
 -profiling
