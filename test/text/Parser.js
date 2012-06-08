@@ -60,28 +60,5 @@ describe('tpo.text.Parser', function() {
             parser.write(el);
             parser.close();
         });
-
-        it('handles <br> correctly', function(done) {
-            var parser = new Parser(),
-                result = [],
-                el = createElement('some<br>text');
-
-            parser.data.add(function() {
-                result.push(arguments);
-            });
-
-            parser.end.add(function() {
-                expect(result[0][1]).to.eql('some');
-                expect(result[0][0].parent).to.eql(el);
-                expect(result[1][1]).to.eql('\u0085');
-                expect(result[1][0].parent).to.eql(el);
-                expect(result[2][1]).to.eql('text');
-                expect(result[2][0].parent).to.eql(el);
-                done();
-            });
-
-            parser.write(el);
-            parser.close();
-        });
     });
 });
