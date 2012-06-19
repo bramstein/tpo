@@ -5,9 +5,9 @@ Prerequisites
 * npm
 * Java (for the closure compiler)
 
-Then install calcdeps.js:
+Then install `tpo`:
 
-    > sudo npm install -g calcdeps
+    > npm install
 
 Development
 -----------
