@@ -1,3 +1,0 @@
-[submodule "vendor/LLJS"]
-	path = vendor/LLJS
-	url = git@github.com:bramstein/LLJS.git
