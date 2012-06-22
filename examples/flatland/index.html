@@ -23,7 +23,7 @@
 
             article {
                 padding: 2% 15% 2% 15%;
-                font-family: 'Goudy Bookletter', serif;
+                font-family: serif;
                 font-size: 24px;
                 line-height: 36px;
                 color: #444;
@@ -101,20 +101,8 @@
             var root = document.getElementById('tpo-content'),
                 query = 'p';
 
-            WebFont.load({
-                custom: {
-                    families: ['Goudy Bookletter'],
-                    urls: ['fonts/goudy-bookletter.css']
-                },
-                active: function() {
-                    tpo.load(query, root);
-                },
-                inactive: function() {
-                    tpo.load(query, root);
-                }
-            });
-
             tpo.init(query, root);
+            tpo.load(query, root);
         </script>
     </body>
 </html>
