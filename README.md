@@ -39,6 +39,7 @@ A string of text that may contain markup. A TextRun consists of a series of Glue
 A TextBox is a rectangular shape that contains a partial or complete TextRun. A TextBox has both a width and a height, but no position. When all text boxes have a different y position, they can be considered lines, but this is not always so.
 
 The following are legal groups of textblocks:
+
      _______________________
     [___________1___________]
     [___________2___________]
