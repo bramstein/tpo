@@ -21,56 +21,37 @@ describe('tpo.text.Tokenizer', function() {
         });
     });
 
-    describe('#write', function() {
-        it('empty input', function(done) {
+    describe('#parse', function() {
+        it('empty input', function() {
             var t = new Tokenizer(language);
 
-            t.data.add(function() {
-                throw 'Error';
-            });
-            t.end.add(function() {
-                done();
-            });
-            t.write(null, '');
-            t.close();
+            expect(t.parse('')).to.eql([]);
         });
 
-        it('returns one token', function(done) {
+        it('returns one token', function() {
             var t = new Tokenizer(language),
                 result = [];
-            t.data.add(function(position, token) {
-                result.push([token.tokenClass, token.value]);
-            });
-            t.end.add(function() {
-                expect(result.length).to.eql(1);
-                expect(result[0][0]).to.eql(Token.Class.SP);
-                expect(result[0][1]).to.eql(' ');
-                done();
-            });
-            t.write(null, ' ');
-            t.close();
+                
+            result = t.parse(' ');
+            expect(result.length).to.eql(1);
+            expect(result[0].tokenClass).to.eql(Token.Class.SP);
+            expect(result[0].value).to.eql(' ');
         });
 
-        it('returns more tokens', function(done) {
+        it('returns more tokens', function() {
             var t = new Tokenizer(language),
                 result = [];
-            t.data.add(function(position, token) {
-                result.push([token.tokenClass, token.value]);
-            });
-            t.end.add(function() {
-                expect(result.length).to.eql(3);
-                expect(result[0][0]).to.eql(Token.Class.AL);
-                expect(result[0][1]).to.eql('some');
 
-                expect(result[1][0]).to.eql(Token.Class.SP);
-                expect(result[1][1]).to.eql(' ');
+            result = t.parse('some text');
+            expect(result.length).to.eql(3);
+            expect(result[0].tokenClass).to.eql(Token.Class.AL);
+            expect(result[0].value).to.eql('some');
 
-                expect(result[2][0]).to.eql(Token.Class.AL);
-                expect(result[2][1]).to.eql('text');
-                done();
-            });
-            t.write(null, 'some text');
-            t.close();
+            expect(result[1].tokenClass).to.eql(Token.Class.SP);
+            expect(result[1].value).to.eql(' ');
+
+            expect(result[2].tokenClass).to.eql(Token.Class.AL);
+            expect(result[2].value).to.eql('text');
         });
     });
 });
