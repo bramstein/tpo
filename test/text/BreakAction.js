@@ -7,120 +7,78 @@ describe('tpo.text.BreakAction', function() {
         Token = tpo.text.Token;
 
     describe('#write', function(done) {
-        it('handle a single token', function(done) {
-            var breakAction = new BreakAction();
+        it('handle a single token', function() {
+            var breakAction = new BreakAction(),
+                tokens = [new Token(1, Token.Class.SP)];
 
-            breakAction.data.add(function(p, t) {
-                expect(t.tokenClass).to.eql(Token.Class.WJ);
-                expect(t.breakAction).to.eql(BreakAction.Type.EXPLICIT);
-            });
-            breakAction.end.add(done);
+            breakAction.find(tokens);
 
-            breakAction.write(null, new Token(1, Token.Class.SP));
-            breakAction.close();
+            expect(tokens[0].tokenClass).to.eql(Token.Class.SP);
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
-        it('handle two tokens', function(done) {
+        it('handle two tokens', function() {
             var breakAction = new BreakAction(),
-                result = [];
+                tokens = [new Token(1, Token.Class.AL), new Token(2, Token.Class.AL)];
 
-            breakAction.data.add(function(p, t) {
-                result.push(t);
-            });
-            breakAction.end.add(function() {
-                expect(result[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                done();
-            });
+            breakAction.find(tokens);
 
-            breakAction.write(null, new Token(1, Token.Class.AL));
-            breakAction.write(null, new Token(2, Token.Class.AL));
-            breakAction.close();
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
-        it('handle indirect breaks (AL, SP, AL)', function(done) {
+        it('handle indirect breaks (AL, SP, AL)', function() {
             var breakAction = new BreakAction(),
-                result = [];
+                tokens = [new Token(1, Token.Class.AL), new Token(2, Token.Class.SP), new Token(3, Token.Class.AL)];
 
-            breakAction.data.add(function(p, t) {
-                result.push(t);
-            });
-            breakAction.end.add(function() {
-                expect(result[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[1].breakAction).to.eql(BreakAction.Type.INDIRECT);
-                expect(result[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                done();
-            });
+            breakAction.find(tokens);
 
-            breakAction.write(null, new Token(1, Token.Class.AL));
-            breakAction.write(null, new Token(2, Token.Class.SP));
-            breakAction.write(null, new Token(3, Token.Class.AL));
-            breakAction.close();
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.INDIRECT);
+            expect(tokens[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
-        it('handles direct breaks (AL, B2, AL)', function(done) {
+        it('handles direct breaks (AL, B2, AL)', function() {
             var breakAction = new BreakAction(),
-                result = [];
+                tokens = [new Token(1, Token.Class.AL), new Token(2, Token.Class.B2), new Token(3, Token.Class.AL)];
 
-            breakAction.data.add(function(p, t) {
-                result.push(t);
-            });
+            breakAction.find(tokens);
 
-            breakAction.end.add(function() {
-                expect(result[0].breakAction).to.eql(BreakAction.Type.DIRECT);
-                expect(result[1].breakAction).to.eql(BreakAction.Type.DIRECT);
-                expect(result[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                done();
-            });
-
-            breakAction.write(null, new Token(1, Token.Class.AL));
-            breakAction.write(null, new Token(2, Token.Class.B2));
-            breakAction.write(null, new Token(3, Token.Class.AL));
-            breakAction.close();
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.DIRECT);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.DIRECT);
+            expect(tokens[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
-        it('handles explicit breaks (AL, NL, AL, AL)', function(done) {
+        it('handles explicit breaks (AL, NL, AL, AL)', function() {
             var breakAction = new BreakAction(),
-                result = [];
+                tokens = [
+                    new Token(1, Token.Class.AL),
+                    new Token(2, Token.Class.NL),
+                    new Token(3, Token.Class.AL),
+                    new Token(4, Token.Class.AL)
+                ];
 
-            breakAction.data.add(function(p, t) {
-                result.push(t);
-            });
-
-            breakAction.end.add(function() {
-                expect(result[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                expect(result[2].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[3].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                done();
-            });
-
-            breakAction.write(null, new Token(1, Token.Class.AL));
-            breakAction.write(null, new Token(2, Token.Class.NL));
-            breakAction.write(null, new Token(3, Token.Class.AL));
-            breakAction.write(null, new Token(4, Token.Class.AL));
-            breakAction.close();
+            breakAction.find(tokens);
+            
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
+            expect(tokens[2].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[3].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
-        it('handles prohibited breaks (AL, AL, AL)', function(done) {
+        it('handles prohibited breaks (AL, AL, AL)', function() {
             var breakAction = new BreakAction(),
-                result = [];
+                tokens = [
+                    new Token(1, Token.Class.AL),
+                    new Token(2, Token.Class.AL),
+                    new Token(3, Token.Class.AL)
+                ];
 
-            breakAction.data.add(function(p, t) {
-                result.push(t);
-            });
+            breakAction.find(tokens);
 
-            breakAction.end.add(function() {
-                expect(result[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[1].breakAction).to.eql(BreakAction.Type.PROHIBITED);
-                expect(result[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
-                done();
-            });
-
-            breakAction.write(null, new Token(1, Token.Class.AL));
-            breakAction.write(null, new Token(2, Token.Class.AL));
-            breakAction.write(null, new Token(3, Token.Class.AL));
-            breakAction.close();
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
         // TODO: Test combining classes
