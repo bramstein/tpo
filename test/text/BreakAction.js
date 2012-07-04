@@ -59,7 +59,7 @@ describe('tpo.text.BreakAction', function() {
                 ];
 
             breakAction.find(tokens);
-            
+
             expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
             expect(tokens[1].breakAction).to.eql(BreakAction.Type.EXPLICIT);
             expect(tokens[2].breakAction).to.eql(BreakAction.Type.PROHIBITED);
@@ -79,6 +79,23 @@ describe('tpo.text.BreakAction', function() {
             expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
             expect(tokens[1].breakAction).to.eql(BreakAction.Type.PROHIBITED);
             expect(tokens[2].breakAction).to.eql(BreakAction.Type.EXPLICIT);
+        });
+
+        it('handles soft hyphens (AL, BA, AL, AL)', function() {
+            var breakAction = new BreakAction(),
+                tokens = [
+                    new Token(1, Token.Class.AL),
+                    new Token(2, Token.Class.BA),
+                    new Token(3, Token.Class.AL),
+                    new Token(4, Token.Class.AL)
+                ];
+
+            breakAction.find(tokens);
+
+            expect(tokens[0].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[1].breakAction).to.eql(BreakAction.Type.DIRECT);
+            expect(tokens[2].breakAction).to.eql(BreakAction.Type.PROHIBITED);
+            expect(tokens[3].breakAction).to.eql(BreakAction.Type.EXPLICIT);
         });
 
         // TODO: Test combining classes
