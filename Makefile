@@ -6,7 +6,7 @@ PATH:=./node_modules/.bin/:${PATH}
 
 build/tpo.js: $(js)
 	mkdir -p build
-	java -jar vendor/goog/compiler.jar --flagfile compiler-options --define='goog.DEBUG=false' --js $(call dependency_list,$(dependencies)) > $@
+	java -jar vendor/goog/compiler.jar --flagfile compiler-options --define='goog.DEBUG=false' --define='tpo.PREPROCESSED=true' --js $(call dependency_list,$(dependencies)) > $@
 
 build/tpo-debug.js: $(js)
 	mkdir -p build
