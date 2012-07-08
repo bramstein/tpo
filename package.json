@@ -9,7 +9,7 @@
     "node": "0.6.7"
   },
   "dependencies": {
-    "calcdeps": "0.1.4"
+    "calcdeps": "0.1.7"
   },
   "devDependencies": {}
 }
