@@ -8,6 +8,10 @@ build/tpo.js: $(js)
 	mkdir -p build
 	java -jar vendor/goog/compiler.jar --flagfile compiler-options --define='goog.DEBUG=false' --define='tpo.PREPROCESSED=true' --js $(call dependency_list,$(dependencies)) > $@
 
+build/tpo-test.js: $(js)
+	mkdir -p build
+	java -jar vendor/goog/compiler.jar --flagfile compiler-options --define='goog.DEBUG=true' --define='tpo.PREPROCESSED=false' --js $(call dependency_list,$(dependencies)) > $@
+
 build/tpo-debug.js: $(js)
 	mkdir -p build
 	java -jar vendor/goog/compiler.jar --flagfile compiler-options --debug=true --formatting=PRETTY_PRINT --formatting=PRINT_INPUT_DELIMITER --js $(call dependency_list,$(dependencies)) > $@
