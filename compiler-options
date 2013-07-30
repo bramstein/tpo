@@ -1,6 +1,3 @@
-BLAH
-
-
 --compilation_level=ADVANCED_OPTIMIZATIONS
 --jscomp_error accessControls
 --jscomp_error checkRegExp
